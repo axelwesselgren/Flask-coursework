@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block navtitle %}{{ title }}{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 700px; margin: 0 auto;">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title mb-0">{{ title }}</h3>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ content }}</p>
+        </div>
+    </div>
+    <div id="replies"> 
+        {% for thread in replies %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3 class="card-title mb-0">{{ thread[0] }}</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ thread[1] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <input id="answer" class="form-control" placeholder="Answer..." type="text">
+            <button type="button" class="btn btn-outline-primary mt-3" id="btnAnswer">Send</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(() => {
+    $("#btnAnswer").click(() => {
+        const content = $("#answer").val();
+
+        $.ajax({
+            method: 'POST',
+            url: "/answerthread/" + {{ thread_id | tojson }},
+            data: JSON.stringify({ title: {{ title | tojson }}, content: content, id: {{ thread_id | tojson }} }),
+            headers: {'Content-Type': 'application/json'},
+            dataType: 'json',
+            success: (response) => {
+                let card = document.createElement("div");
+                let cardHeader = document.createElement("div");
+                let cardBody = document.createElement("div");
+
+                card.className = "card mb-3";
+                cardHeader.className = "card-header";
+                cardBody.className = "card-body";
+
+                let cardTitle = document.createElement("h3");
+                let cardText = document.createElement("p");
+
+                cardTitle.className = "card-title mb-0";
+                cardText.className = "card-text";
+
+                cardTitle.innerHTML = "RE:" + {{ title | tojson }};
+                cardText.innerHTML = content;
+
+                cardHeader.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+
+                card.appendChild(cardHeader);
+                card.appendChild(cardBody);
+
+                $("#replies").append(card);
+            }
+        });
+    })
+});
+</script>
+{% endblock %}

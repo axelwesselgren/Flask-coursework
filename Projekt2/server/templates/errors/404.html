@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}404{% endblock %}
+{% block navtitle %}Error{% endblock %}
+{% block content %}
+<h1 class="mb-3">404 - Not Found</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <a class="btn btn-danger btn-lg" href="{{ url_for('index') }}">ESCAPE</a>
+</div>
+{% endblock %}

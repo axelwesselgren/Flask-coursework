@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %}
+{% block navtitle %}Search{% endblock %}
+{% block header %}Search Among Threads{% endblock %}
+{% block content %}
+<div>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex align-items-center">
+            <input type="text" id="search" class="form-control" placeholder="Search...">
+            <button type="button" class="btn btn-outline-primary ms-2" id="btnSearch">Search</button>
+        </div>
+    </div>
+    <div id="results"></div>
+    <div>
+        <button class="btn btn-outline-primary" type="button" id="show">Show more</button>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(() => {
+        let offset = 0;
+
+        const reset = () => {
+            $("#results").empty();
+            $("#show").show();
+            offset = 0;
+        }
+
+        const search = () => {
+            const search = $("#search").val();
+
+            getResults(search, offset);
+        }
+
+        const getResults = (search, offset) => {
+            $.ajax({
+                // Borde kanske vara GET men jag vet inte hur jag skulle fixa det då med tanke på att ingen data ändras i databasen
+                method: 'POST',
+                url: '/searchthread',
+                data: JSON.stringify({ search: search, offset: offset }),
+                headers: {'Content-Type': 'application/json'},
+                dataType: 'json',
+                success: (response) => {
+                    const results = response['results'];
+
+                    if (results.length != 3) {
+                        $("#show").hide();
+                    }
+                    
+                    for (const result of results) {
+                        createCard(result[0], result[1])
+                    }
+                }
+            });
+        }
+
+        const createCard = (title, text) => {
+            let card = document.createElement("div");
+            let cardHeader = document.createElement("div");
+            let cardBody = document.createElement("div");
+    
+            card.className = "card mb-3";
+            cardHeader.className = "card-header";
+            cardBody.className = "card-body";
+    
+            let cardTitle = document.createElement("h3");
+            let cardText = document.createElement("p");
+    
+            cardTitle.className = "card-title mb-0";
+            cardText.className = "card-text";
+    
+            cardTitle.innerHTML = title
+            cardText.innerHTML = text
+    
+            cardHeader.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+    
+            card.appendChild(cardHeader);
+            card.appendChild(cardBody);
+    
+            $("#results").append(card);
+        }
+
+        $("#btnSearch").click(() => {
+            reset();
+            search();
+        });
+
+        $("#show").click(() => {
+            offset += 3;
+            search();
+        });
+    });
+</script>
+{% endblock %}

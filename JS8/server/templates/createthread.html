@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}Create Thread{% endblock %}
+{% block navtitle %}Create new thread{% endblock %}
+{% block header %}What is on your mind?{% endblock %}
+{% block content %}
+<div class="card shadow-lg" style="width: 400px;">
+    <div class="card-body">
+        <form method="POST" class="needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.title.label(class_="form-label") }}
+                {% if form.title.errors %}
+                    {{ form.title(class_="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class_="form-control") }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.content.label(class_="form-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class_="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class_="form-control") }}
+                {% endif %}
+            </div>
+
+            {{ form.create(class_="mt-2 btn btn-outline-primary w-100")}}
+        </form>
+    </div>
+</div>
+{% endblock %}

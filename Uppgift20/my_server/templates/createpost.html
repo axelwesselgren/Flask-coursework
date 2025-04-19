@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Nytt Inlägg{% endblock %}
+{% block headline %}
+<div class="text-center my-4">
+    <h1>Nytt Inlägg</h1>
+</div>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.content.label(class='form-label') }}
+                            {% if form.content.errors %}
+                                {{ form.content(class='form-control', id='content')}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.content.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.content(class="form-control form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="col mt-3">
+                            {{ form.submit(class='btn btn-outline-primary') }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    (() => {
+        'use strict'
+
+        const forms = document.querySelectorAll('.needs-validation')
+    
+        Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+    
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()  
+</script>
+{% endblock %}

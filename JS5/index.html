@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="main.css">
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <script>
+            const createDivs = () => {
+                let div1 = document.createElement("div");
+                let div2 = document.createElement("div");
+                let divContainer = document.createElement("div");
+
+                divContainer.id = "container";
+
+                div1.className = "klass1"
+                div2.className = "klass2"
+
+                div1.innerHTML = "text1"
+                div2.innerHTML = "text2"
+                divContainer.innerHTML = "container";
+
+                $("body").append(div1);
+                $("body").append(div2);
+                $("body").append(divContainer);
+
+                $(".klass2").click(function() {
+                    $(this).hide();
+                });
+            }
+
+            const createButtons = () => {
+                let btnCreate = document.createElement("button");
+                let btnRemove = document.createElement("button");
+                let btnColor = document.createElement("button");
+
+                btnCreate.innerHTML = "Create div!"
+                btnRemove.innerHTML = "Remove button";
+                btnColor.innerHTML = "Click me!";
+                
+                btnCreate.id = "btnCreate";
+                btnRemove.id = "btnRemove";
+                btnColor.id = "btnColor"
+
+                $("body").append(btnColor);
+                $("body").append(btnRemove);
+                $("body").append(btnCreate);
+
+                $("#btnRemove").click(() => $(".klass1").remove());
+                $("#btnColor").click(() => $("div").css("background-color", "green"));
+                $("#btnCreate").click(() => {
+                    let newDiv = document.createElement("div");
+    
+                    newDiv.className = "klass2";
+                    newDiv.innerHTML = "inner container"
+    
+                    $("#container").append(newDiv);
+                })
+            }
+
+            $(document).ready(() => {
+                createDivs();
+                createButtons();
+            });
+        </script>
+    </body>
+</html>

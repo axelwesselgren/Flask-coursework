@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block headline %}
+    <h1>Login</h1>
+{% endblock %}
+{% block content %}
+    {% if logged_in == False %}
+    <form action="{{ url_for('login') }}" method="post">
+        <p><input type="text" name="username"/></p>
+        <p><input type="password" name="password"/></p>
+        <p><input type="submit" value="Logga in"/></p>
+    </form>
+    {% else %}
+    <a class="btn" href="/logout">Logout</a>
+    {% endif %}
+{% endblock %}

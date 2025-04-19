@@ -1,0 +1,21 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vW;
+}
+
+table {
+    width: 100%;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.profile_pict {
+    width: 100px;
+}

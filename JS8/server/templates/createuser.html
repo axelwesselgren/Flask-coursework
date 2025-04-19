@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block navtitle %}Register{% endblock %}
+{% block header %}Register{% endblock %}
+{% block content %}
+<div class="card shadow-lg" style="width: 400px;">
+    <div class="card-body">
+        <form method="POST" class="needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.username.label(class_="form-label") }}
+                {% if form.username.errors %}
+                    {{ form.username(class_="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class_="form-control") }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.password.label(class_="form-label")}}
+                {% if form.password.errors %}
+                    {{ form.password(class_="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class_="form-control") }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.password_repeat.label(class_="form-label")}}
+                {% if form.password_repeat.errors %}
+                    {{ form.password_repeat(class_="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password_repeat.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password_repeat(class_="form-control") }}
+                {% endif %}
+            </div>
+
+            {{ form.register(class_="mt-2 btn btn-outline-primary w-100")}}
+        </form>
+    </div>
+</div>
+{% endblock %}

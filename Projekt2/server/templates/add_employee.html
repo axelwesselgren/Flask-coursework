@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}Add Employee{% endblock %}
+{% block navtitle %}Add Employee{% endblock %}
+{% block header %}Add Employee{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="card shadow-lg" style="width: 400px;">
+        <div class="card-body">
+            <form method="POST">
+                {{ add_employee_form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ add_employee_form.name.label(class_="form-label") }}
+                    {{ add_employee_form.name(class_="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ add_employee_form.telephone.label(class_="form-label") }}
+                    {{ add_employee_form.telephone(class_="form-control") }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ add_employee_form.salary.label(class_="form-label") }}
+                    {{ add_employee_form.salary(class_="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ add_employee_form.boss.label(class_="form-label") }}
+                    {{ add_employee_form.boss(class_="form-select") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ add_employee_form.department.label(class_="form-label") }}
+                    {{ add_employee_form.department(class_="form-select") }}
+                </div>
+
+                <div class="text-center">
+                    {{ add_employee_form.add(class_="btn btn-outline-primary w-100 mt-2") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

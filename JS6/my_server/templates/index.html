@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} AJAX request using jQuery {% endblock %}
+{% block content %}
+<div class="container">
+    <button id="btn_get_info">Hämta info</button>
+    <button id="btn_sendrequest">Skicka person till servern och öka ålder</button>
+</div>
+<div class="container">
+    <h2>Information om person</h2>
+    <p id="content"></p>
+</div>
+{% endblock %}

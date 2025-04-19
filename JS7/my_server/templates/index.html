@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Välkommen{% endblock %}
+
+{% block headline%} Personaldatabasen {% endblock %}
+{% block content %}
+   <h2 class="display-4">Här kan vi titta i databasen</h2>
+   <p>sök efter namn: <input type="text" id="search"></p>
+   <p>
+      <button id="btn_h">Högkvarteret</button>
+      <button id="btn_s">Säkerhet</button>
+      <button id="btn_d">Data</button>
+   </p>
+   <p id="personal"></p>
+{% endblock %}

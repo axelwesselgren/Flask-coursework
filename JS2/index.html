@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div class="klass" style="background-color: red;">text</div>
+        <div class="klass" style="background-color: yellow">text</div>
+        <div class="klass" style="background-color: blue">text</div>
+
+        <button onclick="changeDivs()">Click me!</button>
+
+        <script>
+            const changeDivs = () => {
+                let divs = document.getElementsByClassName("klass")
+
+                for (const div of divs) {
+                    div.style.backgroundColor = "green"
+                }
+
+                let div = document.createElement("div")
+
+                div.style.backgroundColor = "red"
+                div.style.scale = 0.5
+                div.innerHTML = "text"
+
+                divs[0].appendChild(div)
+            }
+        </script>
+    </body>
+</html>

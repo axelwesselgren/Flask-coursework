@@ -1,0 +1,9 @@
+<h1>
+    {% if name is not none and surname is not none %}
+    Hej {{ name }} {{ surname }}
+    {% elif name is not none and surname is none %}
+    Hej {{ name }}
+    {% else %}
+    Ogiltig sida
+    {% endif %}
+</h1>
